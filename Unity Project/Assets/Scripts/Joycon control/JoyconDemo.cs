@@ -18,6 +18,7 @@ public class JoyconDemo : MonoBehaviour {
         gyro = new Vector3(0, 0, 0);
         accel = new Vector3(0, 0, 0);
         // get the public Joycon array attached to the JoyconManager in scene
+		// シーン内のジョイコンマネージャーにアタッチされているジョイコン配列を取得
         joycons = JoyconManager.Instance.j;
 		if (joycons.Count < jc_ind+1){
 			Destroy(gameObject);
@@ -27,6 +28,7 @@ public class JoyconDemo : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 		// make sure the Joycon only gets checked if attached
+		// ジョイコンが接続されている時だけチェックする
 		if (joycons.Count > 0)
         {
 			Joycon j = joycons [jc_ind];
@@ -53,7 +55,7 @@ public class JoyconDemo : MonoBehaviour {
 
 			if (j.GetButtonDown (Joycon.Button.DPAD_DOWN)) {
 				Debug.Log ("Rumble");
-
+				// 傾き（多分）
 				// Rumble for 200 milliseconds, with low frequency rumble at 160 Hz and high frequency rumble at 320 Hz. For more information check:
 				// https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering/blob/master/rumble_data_table.md
 
@@ -70,6 +72,7 @@ public class JoyconDemo : MonoBehaviour {
             gyro = j.GetGyro();
 
             // Accel values:  x, y, z axis values (in Gs)
+			// 加速度
             accel = j.GetAccel();
 
             orientation = j.GetVector();
