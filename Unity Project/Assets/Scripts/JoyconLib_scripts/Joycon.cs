@@ -426,6 +426,7 @@ public class Joycon
         }
         return 0;
     }
+    //‰Á‘¬“x‚ÌŒŸ’m‚Í‚±‚Ì‰º‚Ì“ñŒÂ‚Á‚Û‚¢
     private void ExtractIMUValues(byte[] report_buf, int n = 0)
     {
         gyr_r[0] = (Int16)(report_buf[19 + n * 12] | ((report_buf[20 + n * 12] << 8) & 0xff00));
