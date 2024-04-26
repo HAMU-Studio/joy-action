@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnScript : MonoBehaviour
+public class EnemySpawn : MonoBehaviour
 {
     public GameObject Enemy;
     public Transform SpawnPoint;
 
     private float time;
     private float spawnTime;
+
     // Start is called before the first frame update
     void Start()
     {
