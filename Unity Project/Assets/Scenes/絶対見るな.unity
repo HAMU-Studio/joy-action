@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 947032982}
+  - component: {fileID: 947032983}
   m_Layer: 0
   m_Name: SpawnPoint (3)
   m_TagString: Untagged
@@ -154,6 +155,20 @@ Transform:
   m_Father: {fileID: 1089930103}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &947032983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947032981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec56c4e6eaab08408f9de7a5bc6a386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 7624267851282903384, guid: e586b065ac042cd47a181e82dd8881b1, type: 3}
+  SpawnPoint: {fileID: 947032982}
 --- !u!1 &1089930102
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1089930103}
+  - component: {fileID: 1089930104}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
@@ -189,6 +205,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1089930104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089930102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec56c4e6eaab08408f9de7a5bc6a386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 681688157265647704, guid: 9c7e34145d38f524e83155cf3f9c3c8c, type: 3}
+  SpawnPoint: {fileID: 1089930103}
 --- !u!1 &1238782036
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,6 +613,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1776263319}
+  - component: {fileID: 1776263320}
   m_Layer: 0
   m_Name: SpawnPoint (4)
   m_TagString: Untagged
@@ -605,6 +636,20 @@ Transform:
   m_Father: {fileID: 1089930103}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776263320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776263318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec56c4e6eaab08408f9de7a5bc6a386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 7624267851282903384, guid: e586b065ac042cd47a181e82dd8881b1, type: 3}
+  SpawnPoint: {fileID: 1776263319}
 --- !u!1 &1871725044
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1871725045}
+  - component: {fileID: 1871725046}
   m_Layer: 0
   m_Name: SpawnPoint (2)
   m_TagString: Untagged
@@ -636,6 +682,20 @@ Transform:
   m_Father: {fileID: 1089930103}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871725046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871725044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec56c4e6eaab08408f9de7a5bc6a386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 7624267851282903384, guid: e586b065ac042cd47a181e82dd8881b1, type: 3}
+  SpawnPoint: {fileID: 1871725045}
 --- !u!1 &2000764561
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2000764562}
+  - component: {fileID: 2000764563}
   m_Layer: 0
   m_Name: SpawnPoint (1)
   m_TagString: Untagged
@@ -667,6 +728,20 @@ Transform:
   m_Father: {fileID: 1089930103}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2000764563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000764561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec56c4e6eaab08408f9de7a5bc6a386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 7624267851282903384, guid: e586b065ac042cd47a181e82dd8881b1, type: 3}
+  SpawnPoint: {fileID: 2000764562}
 --- !u!1 &2054848735
 GameObject:
   m_ObjectHideFlags: 0
