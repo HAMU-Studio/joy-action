@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("isKnockBack");
         Vector3 direction = collision.gameObject.transform.forward;
 
-        m_Rigidbody.AddForce(-direction * knockBackP, ForceMode.Impulse);
+        m_Rigidbody.AddForce(direction * knockBackP, ForceMode.Impulse);
         m_Rigidbody.AddForce(transform.up * knockBackUpP, ForceMode.Impulse);   //é·ä±è„ï˚å¸Ç…Ç‡îÚÇŒÇ∑
 
     }
