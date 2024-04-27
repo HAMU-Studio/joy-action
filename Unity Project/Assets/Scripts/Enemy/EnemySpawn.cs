@@ -8,26 +8,32 @@ public class EnemySpawn : MonoBehaviour
     public Transform SpawnPoint;
 
     private float time;
-    private float spawnTime;
+    private bool hasSpawned = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnTime = 3.0f;
-        //Enemy.transform.position = SpawnPoint.position;
+        time = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-
-        if (spawnTime < time)
+        if (!hasSpawned)
         {
-            GameObject newEnemy = Instantiate(Enemy);
-            newEnemy.transform.position = SpawnPoint.position;
+            time += Time.deltaTime;
 
-            time = 0;
+            if (time >= 3.0f)
+            {
+                SpawnEnemy();
+                hasSpawned = true;
+            }
         }
+    }
+
+    void SpawnEnemy()
+    {
+        GameObject newEnemy = Instantiate(Enemy);
+        newEnemy.transform.position = SpawnPoint.position;
     }
 }
