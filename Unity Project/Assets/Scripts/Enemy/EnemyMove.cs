@@ -6,6 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMove : MonoBehaviour
 {
+    [SerializeField] private float enemyMoveSpeed = 3.5f; // SerializeFieldを使用してEnemyの移動速度を設定
 
     private NavMeshAgent navMeshAgent;
 
@@ -13,7 +14,9 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         // このスクリプトを設定したGameObjectのNavMeshAgentコンポーネントを取得
-        navMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        // Enemyの移動速度を設定
+        navMeshAgent.speed = enemyMoveSpeed;
     }
 
     // PlayerDetectorクラスに作ったonTriggerStayEventにセットする。
@@ -34,7 +37,7 @@ public class EnemyMove : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             // その場で止まる（目的地を今の自分自身の場所にすることにより止めている）
-            navMeshAgent.SetDestination(this.gameObject.transform.position);
+            navMeshAgent.SetDestination(transform.position);
         }
     }
 }
