@@ -27,4 +27,5 @@ public class PlayerDetector : MonoBehaviour
         // InspectorタブのonTriggerExitEventで指定された処理を実行する
         onTriggerExitEvent.Invoke(other);
     }
+
 }
