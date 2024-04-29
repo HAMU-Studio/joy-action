@@ -40,4 +40,14 @@ public class EnemyMove : MonoBehaviour
             navMeshAgent.SetDestination(transform.position);
         }
     }
+
+    // 衝突した際の処理
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 衝突したオブジェクトが"hand"タグを持っている場合、破壊する
+        if (collision.gameObject.tag == "hand")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
