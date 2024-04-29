@@ -230,11 +230,16 @@ public class Joycon
     }
     public Quaternion GetVector()
     {
+        //j_b,i_b,k_bは基底ベクトルでそれぞれx,y,zを表している。
+        //v1はjoyconの傾き（3次元ベクトル）(j_b,i_b,k_bをまとめたもの)
         Vector3 v1 = new Vector3(j_b.x, i_b.x, k_b.x);
+        //v2はv1のz軸ベクトルの逆ベクトルだと思われる。
         Vector3 v2 = -(new Vector3(j_b.z, i_b.z, k_b.z));
+
         if (v2 != Vector3.zero){
 		    return Quaternion.LookRotation(v1, v2);
         }else{
+            //回転していないので0を返している
             return Quaternion.identity;
         }
     }

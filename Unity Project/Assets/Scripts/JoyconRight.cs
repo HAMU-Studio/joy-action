@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JoyconDemo1: MonoBehaviour
+public class JoyconRight : MonoBehaviour
 {
     private List<Joycon> joycons;
 
@@ -10,20 +10,11 @@ public class JoyconDemo1: MonoBehaviour
     public float[] stick;
     public Vector3 gyro;
     public Vector3 accel;
-    // jc_ind = 1:left = 0:Right
     public int jc_ind = 0;
     public Quaternion orientation;
 
-
-    private float rightTime;
-    private float leftTime;
-    private bool ableRightHit;
-    private bool ableLeftHit;
-    private bool rightFlag;
-    private bool leftFlag;
-
     public GameObject Cube;
-    public float CoolTime = 0.3f;
+    private float time;
 
     void Start()
     {
@@ -36,16 +27,11 @@ public class JoyconDemo1: MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        ableLeftHit = true;
-        ableRightHit = true;
-        rightFlag = false;
-        leftFlag = false;
     }
 
     // Update is called once per frame
     void Update()
-    { 
+    {
         // make sure the Joycon only gets checked if attached
         // ジョイコンが接続されている時だけチェックする
         if (joycons.Count > 0)
@@ -81,7 +67,7 @@ public class JoyconDemo1: MonoBehaviour
 
                 j.SetRumble(160, 320, 0.6f, 200);
 
-                // The last argument (rightTime) in SetRumble is optional. Call it with three arguments to turn it on without telling it when to turn off.
+                // The last argument (time) in SetRumble is optional. Call it with three arguments to turn it on without telling it when to turn off.
                 // (Useful for dynamically changing rumble values.)
                 // Then call SetRumble(0,0,0) when you want to turn it off.
             }
@@ -99,70 +85,28 @@ public class JoyconDemo1: MonoBehaviour
             Transform MyTransform = Cube.transform;
             Vector3 pos = MyTransform.position;
 
-            // 
-            Rigidbody rb = Cube.GetComponent<Rigidbody>();
-            Vector3 force = new Vector3(0.0f, 0.0f, 0.5f);
 
-            // Right
-            if (jc_ind == 0)
+            time += Time.deltaTime;
+            // 腕の移動
+            if (j.GetVector().x <= 0 && j.GetAccel().x < 0)
             {
-                if (ableRightHit)
-                {
-                    pos.z = 0f;
-                    MyTransform.position = pos;
+                pos.z += 0.05f;
+                MyTransform.position = pos;
 
-                    if (j.GetVector().x < 0f && j.GetAccel().x < 0)
-                    {
-                        rightFlag = true;
-                        ableRightHit = false;
-                    }
-                }
+                time = 0;
             }
-
-            if (rightFlag)
+            /*if (j.GetAccel().x < 0)
             {
-                rightTime += Time.deltaTime;
+                pos.z += 0.05f;
+                MyTransform.position = pos;
 
-                rb.AddForce(force,ForceMode.Impulse);
+                time = 0;
+            }*/
 
-                if (CoolTime <= rightTime)
-                {
-                    rightFlag = false;
-                    ableRightHit = true;
-
-                    rightTime = 0f;
-                }
-            }
-
-            // Left
-            if (jc_ind == 1)
+            if (pos.z != 0 && 2.0f < time)
             {
-                if (ableLeftHit)
-                {
-                    pos.z = 0f;
-                    MyTransform.position = pos;
-
-                    if (j.GetVector().x < 0f && j.GetAccel().x < 0)
-                    {
-                        leftFlag = true;
-                        ableLeftHit = false;
-                    }
-                }
-            }
-
-            if(leftFlag)
-            {
-                leftTime += Time.deltaTime;
-
-                rb.AddForce(force, ForceMode.Impulse);
-
-                if (CoolTime < leftTime)
-                {
-                    leftFlag = false;
-                    ableLeftHit = true;
-
-                    leftTime = 0f;
-                }
+                pos.z = 0;
+                MyTransform.position = pos;
             }
 
             orientation = j.GetVector();
