@@ -176,7 +176,7 @@ MonoBehaviour:
   accel: {x: 0, y: 0, z: 0}
   jc_ind: 1
   orientation: {x: 0, y: 0, z: 0, w: 0}
-  Cube: {fileID: 56239555}
+  Player: {fileID: 1422349149}
   CoolTime: 0.3
 --- !u!65 &56239558
 BoxCollider:
@@ -255,7 +255,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 118
   m_CollisionDetection: 0
 --- !u!1 &101856572
 GameObject:
@@ -1514,7 +1514,7 @@ MonoBehaviour:
   accel: {x: 0, y: 0, z: 0}
   jc_ind: 0
   orientation: {x: 0, y: 0, z: 0, w: 0}
-  Cube: {fileID: 1831896711}
+  Player: {fileID: 1422349149}
   CoolTime: 0.3
 --- !u!65 &1831896714
 BoxCollider:
@@ -1593,7 +1593,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 118
   m_CollisionDetection: 0
 --- !u!1001 &1871472933
 PrefabInstance:

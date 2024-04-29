@@ -8,11 +8,11 @@ public class JoyconDemo1: MonoBehaviour
 
     // Values made available via Unity
     public float[] stick;
-    public Vector3 gyro;
+    //public Vector3 gyro;
     public Vector3 accel;
     // jc_ind = 1:left = 0:Right
     public int jc_ind = 0;
-    public Quaternion orientation;
+    //public Quaternion orientation;
 
 
     private float rightTime;
@@ -22,13 +22,14 @@ public class JoyconDemo1: MonoBehaviour
     private bool rightFlag;
     private bool leftFlag;
 
-    public GameObject Cube;
+    public GameObject Player;
     public float CoolTime = 0.3f;
 
     void Start()
     {
-        gyro = new Vector3(0, 0, 0);
+        //gyro = new Vector3(0, 0, 0);
         accel = new Vector3(0, 0, 0);
+
         // get the public Joycon array attached to the JoyconManager in scene
         // シーン内のジョイコンマネージャーにアタッチされているジョイコン配列を取得
         joycons = JoyconManager.Instance.j;
@@ -51,56 +52,19 @@ public class JoyconDemo1: MonoBehaviour
         if (joycons.Count > 0)
         {
             Joycon j = joycons[jc_ind];
-            // GetButtonDown checks if a button has been pressed (not held)
-            if (j.GetButtonDown(Joycon.Button.SHOULDER_2))
-            {
-                Debug.Log("Shoulder button 2 pressed");
-                // GetStick returns a 2-element vector with x/y joystick components
-                Debug.Log(string.Format("Stick x: {0:N} Stick y: {1:N}", j.GetStick()[0], j.GetStick()[1]));
-
-                // Joycon has no magnetometer, so it cannot accurately determine its yaw value. Joycon.Recenter allows the user to reset the yaw value.
-                j.Recenter();
-            }
-            // GetButtonDown checks if a button has been released
-            if (j.GetButtonUp(Joycon.Button.SHOULDER_2))
-            {
-                Debug.Log("Shoulder button 2 released");
-            }
-            // GetButtonDown checks if a button is currently down (pressed or held)
-            if (j.GetButton(Joycon.Button.SHOULDER_2))
-            {
-                Debug.Log("Shoulder button 2 held");
-            }
-
-            if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
-            {
-                Debug.Log("Rumble");
-                // 傾き（多分）
-                // Rumble for 200 milliseconds, with low frequency rumble at 160 Hz and high frequency rumble at 320 Hz. For more information check:
-                // https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering/blob/master/rumble_data_table.md
-
-                j.SetRumble(160, 320, 0.6f, 200);
-
-                // The last argument (rightTime) in SetRumble is optional. Call it with three arguments to turn it on without telling it when to turn off.
-                // (Useful for dynamically changing rumble values.)
-                // Then call SetRumble(0,0,0) when you want to turn it off.
-            }
-
-            stick = j.GetStick();
-
-            // Gyro values: x, y, z axis values (in radians per second)
-            gyro = j.GetGyro();
 
             // Accel values:  x, y, z axis values (in Gs)
             // 加速度
             accel = j.GetAccel();
 
             // ポジション取得
-            Transform MyTransform = Cube.transform;
-            Vector3 pos = MyTransform.position;
+            Transform PlayerTransform = Player.transform;
+            Vector3 PlayerPos = PlayerTransform.localPosition;
+            Transform ArmTransform = this.transform;
+            Vector3 ArmPos = ArmTransform.position;
 
-            // 
-            Rigidbody rb = Cube.GetComponent<Rigidbody>();
+            Rigidbody rb = this.GetComponent<Rigidbody>();
+            // パンチの威力
             Vector3 force = new Vector3(0.0f, 0.0f, 0.5f);
 
             // Right
@@ -108,8 +72,10 @@ public class JoyconDemo1: MonoBehaviour
             {
                 if (ableRightHit)
                 {
-                    pos.z = 0f;
-                    MyTransform.position = pos;
+                    ArmPos.x = PlayerPos.x - 2.0f;
+                    //ArmPos.y = PlayerPos.y;
+                    ArmPos.z = PlayerPos.z;
+                    ArmTransform.position = ArmPos;
 
                     if (j.GetVector().x < 0f && j.GetAccel().x < 0)
                     {
@@ -118,7 +84,6 @@ public class JoyconDemo1: MonoBehaviour
                     }
                 }
             }
-
             if (rightFlag)
             {
                 rightTime += Time.deltaTime;
@@ -139,8 +104,10 @@ public class JoyconDemo1: MonoBehaviour
             {
                 if (ableLeftHit)
                 {
-                    pos.z = 0f;
-                    MyTransform.position = pos;
+                    ArmPos.x = PlayerPos.x + 2.0f;
+                    ArmPos.y = PlayerPos.y;
+                    ArmPos.z = PlayerPos.z;
+                    ArmTransform.position = ArmPos;
 
                     if (j.GetVector().x < 0f && j.GetAccel().x < 0)
                     {
@@ -149,7 +116,6 @@ public class JoyconDemo1: MonoBehaviour
                     }
                 }
             }
-
             if(leftFlag)
             {
                 leftTime += Time.deltaTime;
@@ -164,17 +130,7 @@ public class JoyconDemo1: MonoBehaviour
                     leftTime = 0f;
                 }
             }
-
-            orientation = j.GetVector();
-            if (j.GetButton(Joycon.Button.DPAD_UP))
-            {
-                gameObject.GetComponent<Renderer>().material.color = Color.red;
-            }
-            else
-            {
-                gameObject.GetComponent<Renderer>().material.color = Color.blue;
-            }
-            gameObject.transform.rotation = orientation;
         }
     }
+
 }

@@ -22,7 +22,7 @@ public class Punching : MonoBehaviour
     private bool rightFlag;
     private bool leftFlag;
 
-    public GameObject Cube;
+    public GameObject Player;
     public float CoolTime = 0.3f;
 
     void Start()
@@ -96,20 +96,25 @@ public class Punching : MonoBehaviour
             accel = j.GetAccel();
 
             // ƒ|ƒWƒVƒ‡ƒ“Žæ“¾
-            Transform MyTransform = Cube.transform;
-            Vector3 pos = MyTransform.position;
+            Transform ArmTransform = this.transform;
+            Vector3 ArmPos = ArmTransform.position;
+            Transform PlayerTransform = Player.transform;
+            Vector3 PlayerPos = PlayerTransform.position;
 
             // 
-            Rigidbody rb = Cube.GetComponent<Rigidbody>();
-            Vector3 force = new Vector3(0.0f, 0.0f, 0.5f);
+            Rigidbody rb = this.GetComponent<Rigidbody>();
+            Vector3 force = new Vector3(0.0f, 0.0f, 0.3f);
 
             // Right
             if (jc_ind == 0)
             {
                 if (ableRightHit)
                 {
-                    pos.z = 0f;
-                    MyTransform.position = pos;
+                    ArmPos.x = PlayerPos.x - 1.0f;
+                    ArmPos.y = PlayerPos.y;
+                    ArmPos.z = PlayerPos.z; 
+                    ArmTransform.position = ArmPos;
+
 
                     if (j.GetVector().x < 0f && j.GetAccel().x < 0)
                     {
@@ -139,8 +144,10 @@ public class Punching : MonoBehaviour
             {
                 if (ableLeftHit)
                 {
-                    pos.z = 0f;
-                    MyTransform.position = pos;
+                    ArmPos.x = PlayerPos.x + 1.0f;
+                    ArmPos.y = PlayerPos.y;
+                    ArmPos.z = PlayerPos.z;
+                    ArmTransform.position = ArmPos;
 
                     if (j.GetVector().x < 0f && j.GetAccel().x < 0)
                     {
@@ -165,7 +172,7 @@ public class Punching : MonoBehaviour
                 }
             }
 
-            orientation = j.GetVector();
+            /*orientation = j.GetVector();
             if (j.GetButton(Joycon.Button.DPAD_UP))
             {
                 gameObject.GetComponent<Renderer>().material.color = Color.red;
@@ -174,7 +181,7 @@ public class Punching : MonoBehaviour
             {
                 gameObject.GetComponent<Renderer>().material.color = Color.blue;
             }
-            gameObject.transform.rotation = orientation;
+            gameObject.transform.rotation = orientation;*/
         }
     }
 }
