@@ -23,6 +23,7 @@ public class Punching : MonoBehaviour
     private bool leftFlag;
 
     public GameObject Player;
+    // パンチのクールタイム
     public float CoolTime = 0.3f;
 
     void Start()
@@ -97,23 +98,24 @@ public class Punching : MonoBehaviour
 
             // ポジション取得
             Transform ArmTransform = this.transform;
-            Vector3 ArmPos = ArmTransform.position;
+            Vector3 ArmPos = ArmTransform.localPosition;
+            ArmTransform.parent=Player.transform;
             Transform PlayerTransform = Player.transform;
-            Vector3 PlayerPos = PlayerTransform.position;
+            Vector3 PlayerPos = PlayerTransform.localPosition;
 
             // 
             Rigidbody rb = this.GetComponent<Rigidbody>();
-            Vector3 force = new Vector3(0.0f, 0.0f, 0.3f);
+            Vector3 Punch = 0.3f * ArmTransform.forward;
 
             // Right
             if (jc_ind == 0)
             {
                 if (ableRightHit)
                 {
-                    ArmPos.x = PlayerPos.x - 1.0f;
-                    ArmPos.y = PlayerPos.y;
-                    ArmPos.z = PlayerPos.z; 
-                    ArmTransform.position = ArmPos;
+                    ArmPos.x = -1.0f;
+                    ArmPos.y = 0f;
+                    ArmPos.z = 0f;
+                    ArmTransform.localPosition = ArmPos;
 
 
                     if (j.GetVector().x < 0f && j.GetAccel().x < 0)
@@ -122,20 +124,21 @@ public class Punching : MonoBehaviour
                         ableRightHit = false;
                     }
                 }
-            }
 
-            if (rightFlag)
-            {
-                rightTime += Time.deltaTime;
 
-                rb.AddForce(force,ForceMode.Impulse);
-
-                if (CoolTime <= rightTime)
+                if (rightFlag)
                 {
-                    rightFlag = false;
-                    ableRightHit = true;
+                    rightTime += Time.deltaTime;
 
-                    rightTime = 0f;
+                    rb.AddForce(transform.forward * 0.3f, ForceMode.Force);
+
+                    if (CoolTime <= rightTime)
+                    {
+                        rightFlag = false;
+                        ableRightHit = true;
+
+                        rightTime = 0f;
+                    }
                 }
             }
 
@@ -144,10 +147,10 @@ public class Punching : MonoBehaviour
             {
                 if (ableLeftHit)
                 {
-                    ArmPos.x = PlayerPos.x + 1.0f;
-                    ArmPos.y = PlayerPos.y;
-                    ArmPos.z = PlayerPos.z;
-                    ArmTransform.position = ArmPos;
+                    ArmPos.x = 1.0f;
+                    ArmPos.y = 0f;
+                    ArmPos.z = 0f;
+                    ArmTransform.localPosition = ArmPos;
 
                     if (j.GetVector().x < 0f && j.GetAccel().x < 0)
                     {
@@ -155,20 +158,21 @@ public class Punching : MonoBehaviour
                         ableLeftHit = false;
                     }
                 }
-            }
 
-            if(leftFlag)
-            {
-                leftTime += Time.deltaTime;
 
-                rb.AddForce(force, ForceMode.Impulse);
-
-                if (CoolTime < leftTime)
+                if (leftFlag)
                 {
-                    leftFlag = false;
-                    ableLeftHit = true;
+                    leftTime += Time.deltaTime;
 
-                    leftTime = 0f;
+                    rb.AddForce(Punch);
+
+                    if (CoolTime < leftTime)
+                    {
+                        leftFlag = false;
+                        ableLeftHit = true;
+
+                        leftTime = 0f;
+                    }
                 }
             }
 

@@ -73,7 +73,7 @@ public class JoyconDemo1: MonoBehaviour
                 if (ableRightHit)
                 {
                     ArmPos.x = PlayerPos.x - 2.0f;
-                    //ArmPos.y = PlayerPos.y;
+                    ArmPos.y = PlayerPos.y;
                     ArmPos.z = PlayerPos.z;
                     ArmTransform.position = ArmPos;
 
