@@ -23,8 +23,20 @@ public class Punching : MonoBehaviour
     private bool leftFlag;
 
     public GameObject Player;
+    public GameObject RTarget;
+    public GameObject LTarget;
     // パンチのクールタイム
     public float CoolTime = 0.3f;
+
+    // ポジション取得
+    Transform ArmTransform;
+    Vector3 ArmPos;
+    Transform PlayerTransform;
+    Vector3 PlayerPos;
+    Transform RightTransform;
+    Vector3 RightPos;
+    Transform LeftTransform;
+    Vector3 LeftPos;
 
     void Start()
     {
@@ -37,6 +49,16 @@ public class Punching : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        ArmTransform = this.gameObject.GetComponent<Transform>();
+        ArmPos = ArmTransform.localPosition;
+        PlayerTransform = Player.transform;
+        PlayerPos = PlayerTransform.localPosition;
+        //RightTarget =
+        ArmTransform.parent = Player.transform;
+
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+
 
         ableLeftHit = true;
         ableRightHit = true;
@@ -97,28 +119,25 @@ public class Punching : MonoBehaviour
             accel = j.GetAccel();
 
             // ポジション取得
-            Transform ArmTransform = this.transform;
-            Vector3 ArmPos = ArmTransform.localPosition;
-            ArmTransform.parent=Player.transform;
-            Transform PlayerTransform = Player.transform;
-            Vector3 PlayerPos = PlayerTransform.localPosition;
+            //Transform PlayerTransform = Player.transform;
+            //Vector3 PlayerPos = PlayerTransform.localPosition;
 
             // 
             Rigidbody rb = this.GetComponent<Rigidbody>();
-            Vector3 Punch = 0.3f * ArmTransform.forward;
+            Vector3 Punch = 1.0f * PlayerTransform.forward;
 
             // Right
             if (jc_ind == 0)
             {
                 if (ableRightHit)
                 {
-                    ArmPos.x = -1.0f;
+                    ArmPos.x = -1.5f;
                     ArmPos.y = 0f;
                     ArmPos.z = 0f;
                     ArmTransform.localPosition = ArmPos;
 
 
-                    if (j.GetVector().x < 0f && j.GetAccel().x < 0)
+                    if (j.GetAccel().x < 0f && j.GetAccel().y < 0f)
                     {
                         rightFlag = true;
                         ableRightHit = false;
@@ -130,7 +149,7 @@ public class Punching : MonoBehaviour
                 {
                     rightTime += Time.deltaTime;
 
-                    rb.AddForce(transform.forward * 0.3f, ForceMode.Force);
+                    rb.AddForce(Punch);
 
                     if (CoolTime <= rightTime)
                     {
@@ -147,12 +166,12 @@ public class Punching : MonoBehaviour
             {
                 if (ableLeftHit)
                 {
-                    ArmPos.x = 1.0f;
+                    ArmPos.x = 1.5f;
                     ArmPos.y = 0f;
                     ArmPos.z = 0f;
                     ArmTransform.localPosition = ArmPos;
 
-                    if (j.GetVector().x < 0f && j.GetAccel().x < 0)
+                    if (j.GetAccel().x < 0f && j.GetAccel().y < 0f)
                     {
                         leftFlag = true;
                         ableLeftHit = false;
