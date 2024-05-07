@@ -31,7 +31,7 @@ public class JoyconDemo1: MonoBehaviour
         accel = new Vector3(0, 0, 0);
 
         // get the public Joycon array attached to the JoyconManager in scene
-        // ƒV[ƒ““à‚ÌƒWƒ‡ƒCƒRƒ“ƒ}ƒl[ƒWƒƒ[‚ÉƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚éƒWƒ‡ƒCƒRƒ“”z—ñ‚ğæ“¾
+        // ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ÌƒWï¿½ï¿½ï¿½Cï¿½Rï¿½ï¿½ï¿½}ï¿½lï¿½[ï¿½Wï¿½ï¿½ï¿½[ï¿½ÉƒAï¿½^ï¿½bï¿½`ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½Cï¿½Rï¿½ï¿½ï¿½zï¿½ï¿½ï¿½ï¿½æ“¾
         joycons = JoyconManager.Instance.j;
         if (joycons.Count < jc_ind + 1)
         {
@@ -48,23 +48,23 @@ public class JoyconDemo1: MonoBehaviour
     void Update()
     { 
         // make sure the Joycon only gets checked if attached
-        // ƒWƒ‡ƒCƒRƒ“‚ªÚ‘±‚³‚ê‚Ä‚¢‚é‚¾‚¯ƒ`ƒFƒbƒN‚·‚é
+        // ï¿½Wï¿½ï¿½ï¿½Cï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½Ú‘ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½
         if (joycons.Count > 0)
         {
             Joycon j = joycons[jc_ind];
 
             // Accel values:  x, y, z axis values (in Gs)
-            // ‰Á‘¬“x
+            // ï¿½ï¿½ï¿½ï¿½ï¿½x
             accel = j.GetAccel();
 
-            // ƒ|ƒWƒVƒ‡ƒ“æ“¾
+            // ï¿½|ï¿½Wï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
             Transform PlayerTransform = Player.transform;
             Vector3 PlayerPos = PlayerTransform.localPosition;
             Transform ArmTransform = this.transform;
             Vector3 ArmPos = ArmTransform.position;
 
             Rigidbody rb = this.GetComponent<Rigidbody>();
-            // ƒpƒ“ƒ`‚ÌˆĞ—Í
+            // ï¿½pï¿½ï¿½ï¿½`ï¿½ÌˆĞ—ï¿½
             Vector3 force = new Vector3(0.0f, 0.0f, 0.5f);
 
             // Right
