@@ -12,7 +12,8 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] int missCount = default!;
     [SerializeField] private BlinkingScript blinkingScript = default!;
     //[SerializeField] ResultManager resultManager = default!;
-
+    //[SerializeField] private List<Button> buttons;
+    [SerializeField] private GameObject startButton;
     public bool isDefeat = false, isInvincible = false; //–³“GŽžŠÔ’†‚©‚Ç‚¤‚©
    
     int currentCount = 0;
@@ -27,7 +28,10 @@ public class MainGameManager : MonoBehaviour
             Debug.Log("OnLoadScene");
             onlyF = false;
             isDefeat = false;            
-        }     
+        }
+        //buttons[0].Select();
+      //  startButton = startButton.GetComponent<GameObject>();
+        Time.timeScale = 0f;
     }
 
     private void Update()
@@ -60,6 +64,12 @@ public class MainGameManager : MonoBehaviour
     public void InOrder(int i)
     {
         blinkingScript.StartCoroutine(blinkingScript.DamageIndication(i));
+    }
+
+    public void StartButton()
+    {
+        Time.timeScale = 1f;
+        startButton.SetActive(false);
     }
 
 }

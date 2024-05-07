@@ -98,6 +98,7 @@ public class JoyInputTest : MonoBehaviour
             GUILayout.Label(string.Format("スティック：({0}, {1})", stick[0], stick[1]));
             GUILayout.Label("ジャイロ：" + gyro);
             GUILayout.Label("加速度：" + accel);
+            DrawGraph.Add("加速度の変化 : ", accel);
             GUILayout.Label("傾き：" + orientation);
             GUILayout.EndVertical();
         }
